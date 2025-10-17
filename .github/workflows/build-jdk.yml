@@ -79,9 +79,9 @@ jobs:
           git config http.postBuffer 1048576000
 
           rm -rf jdk installed_binaries
-          git clone --depth=1 --no-tags https://github.com/openjdk/jdk.git
+          git clone --depth=1 --no-tags --no-tags https://github.com/openjdk/jdk.git
           cd jdk
-
+          
           # Fetch only tag references (without full history)
           git fetch --tags --depth=1
 
