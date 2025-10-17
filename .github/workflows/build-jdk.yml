@@ -29,6 +29,7 @@ jobs:
            zip \
            unzip \
            file \
+           pkg-config \
            libx11-dev \
            libxext-dev \
            libxrender-dev \
@@ -36,7 +37,20 @@ jobs:
            libxt-dev \
            libcups2-dev \
            libfontconfig1-dev \
-           libasound2-dev
+           libasound2-dev \
+           libffi-dev \
+           libfreetype6-dev \
+           libpng-dev \
+           libjpeg-dev \
+           ca-certificates \
+           locales \
+           wget \
+           curl \
+           git \
+           python3 \
+           gawk \
+           pandoc \
+           xsltproc
 
 
       - name: Checkout repo
