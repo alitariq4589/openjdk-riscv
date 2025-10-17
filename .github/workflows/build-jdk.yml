@@ -74,7 +74,7 @@ jobs:
 
           # Tweak Git to be more resilient on CI
           git config --global http.postBuffer 524288000
-          git config --global http.maxRequests 2
+          git config --global http.maxRequests 10
           git config --global core.compression 0
 
           rm -rf jdk installed_binaries
