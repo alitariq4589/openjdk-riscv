@@ -43,7 +43,8 @@ jobs:
            libxrender-dev \
            libxrandr-dev \
            libxtst-dev \
-           libxt-dev
+           libxt-dev \
+           file
 
 
       - name: Checkout repo
