@@ -22,6 +22,7 @@ jobs:
         run: |
          export DEBIAN_FRONTEND=noninteractive
          sudo apt-get update
+         sudo apt remove openjdk-* -y
          sudo apt-get install -y \
            build-essential \
            autoconf \
