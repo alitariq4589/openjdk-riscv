@@ -52,7 +52,12 @@ jobs:
            pandoc \
            xsltproc \
            gnutls-bin \
-           git
+           git \
+           openjdk-21-jdk
+
+           BOOT_JAVA_HOME=$(dirname "$(dirname "$(readlink -f "$(which javac)")")")
+           echo "BOOT_JAVA_HOME=$BOOT_JAVA_HOME" >> "$GITHUB_ENV"
+           echo "BOOT_JAVA_HOME=$BOOT_JAVA_HOME" >> "$GITHUB_OUTPUT"
 
 
       - name: Checkout repo
