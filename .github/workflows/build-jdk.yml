@@ -53,7 +53,7 @@ jobs:
            xsltproc \
            gnutls-bin \
            git \
-           openjdk-21-jdk
+           openjdk-25-jdk
 
            BOOT_JAVA_HOME=$(dirname "$(dirname "$(readlink -f "$(which javac)")")")
            echo "BOOT_JAVA_HOME=$BOOT_JAVA_HOME" >> "$GITHUB_ENV"
