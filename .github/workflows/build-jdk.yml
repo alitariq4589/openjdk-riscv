@@ -65,8 +65,6 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Directories
-        run: mkdir -p $GITHUB_WORKSPACE/installed_binaries
       
       - name: Check environment
         run: |
@@ -114,19 +112,14 @@ jobs:
 
       - name: Verify installation
         run: |
-          cd $GITHUB_WORKSPACE/installed_binaries
-          ./jdk/build/linux-riscv64-server-release/images/jdk/bin/java --version
+          $GITHUB_WORKSPACE/jdk/build/linux-riscv64-server-release/images/jdk/bin/java --version
 
       - name: Get JDK version and set outputs
         id: get-version
         run: |
           set -eux
 
-          cd jdk/build/linux-riscv64-server-release/image
-          ls *
-          tree .
-
-          exit 1
+          cd $GITHUB_WORKSPACE/jdk/build/linux-riscv64-server-release/images
           
           JDK_VERSION=$("./jdk/bin/java" --version | head -n1 | awk '{print $2}')
           echo "Detected built JDK version: $JDK_VERSION"
@@ -139,7 +132,7 @@ jobs:
 
       - name: Package binaries
         run: |
-          tar -czf ${{ steps.get-version.outputs.asset_path }} -C ${{ github.workspace }}/installed_binaries .
+          tar -czf ${{ steps.get-version.outputs.asset_path }} -C ${{ github.workspace }}/jdk/build/linux-riscv64-server-release/images jdk
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
