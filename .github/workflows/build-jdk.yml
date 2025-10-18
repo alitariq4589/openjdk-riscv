@@ -80,7 +80,7 @@ jobs:
           set -eux
 
           # Tweak Git to be more resilient on CI
-          git config --global http.version HTTP/3
+          git config --global http.version HTTP/2
           git config https.postBuffer 1048576000
           git config http.postBuffer 1048576000
 
