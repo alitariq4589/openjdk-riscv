@@ -54,7 +54,8 @@ jobs:
            xsltproc \
            gnutls-bin \
            git \
-           openjdk-25-jdk
+           openjdk-25-jdk \
+           tree
 
            BOOT_JAVA_HOME=$(dirname "$(dirname "$(readlink -f "$(which javac)")")")
            echo "BOOT_JAVA_HOME=$BOOT_JAVA_HOME" >> "$GITHUB_ENV"
@@ -100,35 +101,35 @@ jobs:
           git checkout FETCH_HEAD
 
           echo "tag_name=$LATEST_TAG" >> "$GITHUB_OUTPUT"
-
-      - name: Set up Directories for Build
-        run: |
-          mkdir installed_binaries
       
       - name: Configure
         run: |
           cd jdk
-          bash configure --prefix=$GITHUB_WORKSPACE/installed_binaries
+          bash configure
 
       - name: Build
         run: |
           cd jdk
           make JOBS=32 images
 
-      - name: Install
-        run: |
-          cd jdk
-          make JOBS=32 install
-
       - name: Verify installation
         run: |
           cd $GITHUB_WORKSPACE/installed_binaries
-          ./bin/java --version
+          ./jdk/build/linux-riscv64-server-release/images/jdk/bin/java --version
 
       - name: Get JDK version and set outputs
         id: get-version
         run: |
-          JDK_VERSION=$($GITHUB_WORKSPACE/installed_binaries/bin/java --version | head -n1 | awk '{print $2}')
+          set -eux
+
+          cd jdk/build/linux-riscv64-server-release/image
+          ls *
+          tree .
+
+          exit 1
+          
+          JDK_VERSION=$("./jdk/bin/java" --version | head -n1 | awk '{print $2}')
+          echo "Detected built JDK version: $JDK_VERSION"
           ASSET_NAME="openjdk-${JDK_VERSION}-riscv64-linux.tar.gz"
           ASSET_PATH="$GITHUB_WORKSPACE/${ASSET_NAME}"
 
