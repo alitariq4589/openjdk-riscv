@@ -55,7 +55,13 @@ jobs:
            gnutls-bin \
            git \
            openjdk-25-jdk \
-           tree
+           tree \
+           libx11-dev \
+           libxext-dev \
+           libxrender-dev \
+           libxrandr-dev \
+           libxtst-dev \
+           libxt-dev
 
            BOOT_JAVA_HOME=$(dirname "$(dirname "$(readlink -f "$(which javac)")")")
            echo "BOOT_JAVA_HOME=$BOOT_JAVA_HOME" >> "$GITHUB_ENV"
